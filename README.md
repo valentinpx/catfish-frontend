@@ -29,6 +29,6 @@ This is a simple one page application using [Vuetify](https://vuetifyjs.com/) an
 This work is licensed under a [CreativeCreative Commons Attribution-NonCommercial 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
 
 [//]: <> (TODO: Add your names below 😉)
-Made with 💖 by: Valentin Sene,
+Made with 💖 by: [Valentin Sene](mailto:pro@valentinsene.me).
 
 ![Creative Commons License](https://i.creativecommons.org/l/by-nc/4.0/88x31.png "Creative Commons License")

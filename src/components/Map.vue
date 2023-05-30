@@ -1,5 +1,5 @@
 <template>
-  <div id="mapview" />
+  <div id="mapview" :style="`height: ${height}`" />
   <div class="scale">
     <div>{{ `${minmax[0]} ${unit}` }}</div>
     <div>{{ `${minmax[1]} ${unit}` }}</div>
@@ -24,6 +24,14 @@ export default {
     unit: {
       type: String,
       required: true
+    },
+    height: {
+      type: String,
+      default: '500px'
+    },
+    width: {
+      type: String,
+      default: '100%'
     }
   },
   data() {
@@ -67,14 +75,11 @@ export default {
 </script>
 
 <style scoped>
-#mapview {
-  height: 500px;
-}
-
 .scale {
-  width: 100%;
   height: 25px;
   background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(100, 100%, 50%));
+  color: white;
+  font-weight: bold;
   display: flex;
   justify-content: space-between;
 }
