@@ -6,9 +6,9 @@
 
 // Plugins
 import { loadFonts } from './webfontloader'
-import vuetify from './vuetify'
+import axios from './axios'
 
 export function registerPlugins (app) {
   loadFonts()
-  app.use(vuetify)
+  app.use(axios, { baseUrl: process.env.VUE_APP_API_URL })
 }

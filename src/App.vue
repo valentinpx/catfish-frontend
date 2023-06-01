@@ -11,13 +11,17 @@
           <v-text-field v-model="to" type="date" label="TO" class="pl-1" />
         </div>
       </v-form>
-      <div class="grid">
+      <div v-if="points" class="grid">
+        <div v-for="(u, m) in units" class="item">
+          <Chart :points="points" :metric="m" :unit="u" />
+        </div>
         <div class="item-large">
-          <Map :points="points" metric="NITRATE" unit="mg/L" height="90%" />
+          <v-select v-model="mapValue" :items="Object.keys(units)" label="Value" class="mt-4" />
+          <Map :points="points" :metric="mapValue" :unit="units[mapValue] ?? ''" height="65%" />
         </div>
-        <div class="item">
-          graph
-        </div>
+      </div>
+      <div v-else class="text-center h-100 text-h4 mt-12">
+        No data to show yet...
       </div>
     </v-main>
   </v-app>
@@ -25,26 +29,33 @@
 
 <script>
 import Map from '@/components/Map.vue'
-
-var from = new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toISOString().slice(0, 10)
-var to = new Date().toISOString().slice(0, 10)
+import Chart from '@/components/Chart.vue'
 
 export default {
   name: 'App',
   components: {
-    Map
+    Map,
+    Chart
   },
   data() {
     return {
-      idsString: '',
+      units: {
+        "NITRATE": "mg/L",
+        "TEMPERATURE": "°C",
+        "TURBIDITY": "NTU",
+        "OXYGEN": "mg/L",
+        "CONDUCTIVITY": "µS/cm",
+      },
+      mapValue: "NITRATE",
+      idsString: 'CATFISH_PROTOTYPE',
       from: new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toISOString().slice(0, 10),
       to: new Date().toISOString().slice(0, 10),
       points: [
-        { "LAT": 56.678, "LONG": 12.862, "NITRATE": 3 },
-        { "LAT": 56.677, "LONG": 12.861, "NITRATE": 4 },
-        { "LAT": 56.676, "LONG": 12.861, "NITRATE": 3 },
-        { "LAT": 56.675, "LONG": 12.860, "NITRATE": 2 },
-        { "LAT": 56.674, "LONG": 12.860, "NITRATE": 1 }
+        { "TIME": "2023-04-27T04:20:00Z" , "LAT": 56.678, "LONG": 12.862, "NITRATE": 3, "TEMPERATURE": 15, "TURBIDITY": 2, "OXYGEN": 20 },
+        { "TIME": "2023-04-27T04:23:11Z" , "LAT": 56.677, "LONG": 12.861, "NITRATE": 4, "TEMPERATURE": 28, "OXYGEN": 20 },
+        { "TIME": "2023-04-27T04:42:41Z" , "LAT": 56.676, "LONG": 12.861, "NITRATE": 3, "TURBIDITY": 14, "OXYGEN": 30, "CONDUCTIVITY": 0.32 },
+        { "TIME": "2023-04-27T05:01:03Z" , "LAT": 56.675, "LONG": 12.860, "NITRATE": 2, "OXYGEN": 13, "CONDUCTIVITY": 0.4 },
+        { "TIME": "2023-04-27T05:12:12Z" , "LAT": 56.674, "LONG": 12.860, "NITRATE": 1, "CONDUCTIVITY": 0.3 }
       ]
     }
   },
@@ -54,7 +65,7 @@ export default {
   methods: {
     fetchData() {
       if (!this.from || !this.to || !this.idsString) return
-      console.log("plop")
+      // TODO: fetch data from backend
     }
   }
 }

@@ -23,12 +23,11 @@ yarn build
 ```
 
 # Development
-This is a simple one page application using [Vuetify](https://vuetifyjs.com/) and [Chart.js](https://vue-chartjs.org/guide/). Please refer to their documentation for more information.
+This is a simple one page application using [Vuetify](https://vuetifyjs.com/), [Leaflet](https://leafletjs.com/) and [Frappe.js](https://frappe.io/charts/docs). Please refer to their documentation for more information.
 
 # License
 This work is licensed under a [CreativeCreative Commons Attribution-NonCommercial 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
 
-[//]: <> (TODO: Add your names below 😉)
 Made with 💖 by: [Valentin Sene](mailto:pro@valentinsene.me).
 
 ![Creative Commons License](https://i.creativecommons.org/l/by-nc/4.0/88x31.png "Creative Commons License")

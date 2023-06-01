@@ -36,15 +36,26 @@ export default {
   },
   data() {
     return {
+      map: null,
       minmax: []
     }
   },
   mounted() {
+    this.map = this.createMap(this.points[0].LAT, this.points[0].LONG, this.metric)
     this.createPoints(
-      this.createMap(this.points[0].LAT, this.points[0].LONG, this.metric),
+      this.map,
       this.points,
       this.metric
     )
+  },
+  watch: {
+    unit() {
+      this.createPoints(
+        this.map,
+        this.points,
+        this.metric
+      )
+    }
   },
   methods: {
     createMap(lat, long) {
@@ -60,7 +71,7 @@ export default {
 
       this.minmax = points.reduce(
         (acc, point) => [Math.min(acc[0], point[metric] ?? Infinity), Math.max(acc[1], point[metric] ?? -Infinity)],
-        [points[0][metric], points[0][metric]]
+        [Infinity, -Infinity]
       )
       for (const point of points) {
         if ('LAT' in point && 'LONG' in point && metric in point) {
